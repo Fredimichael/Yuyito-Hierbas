@@ -10,14 +10,14 @@ export default function HomePage() {
   return (
     <div className="space-y-12">
       <BannerCarousel images={banners} />
-      <section className="text-center py-4 flex flex-col items-center justify-center">
+      <section className="text-center py-2 flex flex-col items-center justify-center">
         {/* Logo grande */}
         <Image        
-          src="/Sairapng.png" 
-          alt="Logo Sáira" 
-          width={600}
-          height={200}
-          className="h-auto w-auto mb-2"
+          src="/LogoHome.png" 
+          alt="Logo Yuyito Hierbas" 
+          width={400}
+          height={100}
+          className="h-auto w-auto mb-1"
         />
         <p className="text-base md:text-lg opacity-80">Yuyito Hierbas - sabores que viajan, experiencias que transportan.</p>
         <div className="mt-6">

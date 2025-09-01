@@ -38,10 +38,10 @@ export default function Navbar() {
           {/* Logo centrado */}
           <Link href="/" className="flex items-center">
             <Image        
-              src="/Sairapng.png" 
-              alt="Logo Sáira" 
-              width={100}
-              height={40}
+              src="/logoyuyito.png" 
+              alt="Logo Yuyito Hierbas" 
+              width={50}
+              height={20}
               className="h-auto w-auto"
             />
           </Link>
@@ -70,9 +70,9 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <Image        
-              src="/Sairapng.png" 
-              alt="Logo Sáira" 
-              width={120}
+              src="/Logoyuyito.png" 
+              alt="Logo Yuyito Hierbas" 
+              width={60}
               height={40}
               className="h-auto w-auto"
             />
