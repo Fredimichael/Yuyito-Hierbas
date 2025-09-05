@@ -1,23 +1,37 @@
 // data/banners.ts
+
+// 👇 Cambiamos la estructura aquí
 export const banners = [
   {
-    image: "/banners/1.png",
-    alt: "Ver anillos",
-    href: "/catalog?subcat=pulseras",
+    image: {
+      mobile: "/banners/Sumate-a-Yuyito-Mobil.png", // Imagen para móvil
+      desktop: "/banners/Sumate-a-Yuyito.png"   // Imagen para escritorio
+    },
+    alt: "",
+    href: "/",
   },
   {
-    image: "/banners/2.png",
-    alt: "Ver pulseras",
-    href: "/catalog?subcat=anillos",
+    image: {
+      mobile: "/banners/Variedad-Mobil.png",
+      desktop: "/banners/Variedad.png"
+    },
+    alt: " ",
+    href: "/",
   },
-  // {
-  //   image: "/banners/3.png",
-  //   alt: "Ver aros",
-  //   href: "/catalog?subcat=aros",
-  // },
-  // {
-  //   image: "/banners/4.png",
-  //   alt: "Ver collares",
-  //   href: "/catalog?subcat=collares",
-  // },
+  {
+    image: {
+      mobile: "/banners/Frasemobil.png",
+      desktop: "/banners/Frase.png"
+    },
+    alt: "",
+    href: "/",
+  },
+  {
+    image: {
+      mobile: "/banners/MatesMobil.png",
+      desktop: "/banners/Mates.png"
+    },
+    alt: "",
+    href: "/catalog?subcat=mates",
+  }
 ]

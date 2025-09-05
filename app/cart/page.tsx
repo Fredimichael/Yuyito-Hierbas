@@ -23,7 +23,7 @@ export default function CartPage() {
             {items.map(i => (
               <li key={i.id} className="py-4 flex items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
-                  <div className="relative w-36 h-36 rounded-xl overflow-hidden bg-neutral-100">
+                  <div className="relative w-36 h-36 rounded-xl overflow-hidden bg-neutral-100 flex-shrink-0">
                       <Image src={i.images?.[0] || "/placeholder/Anillo_Dual.jpg"} alt={i.title} fill className="object-cover" />
                   </div>
                   <div>

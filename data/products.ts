@@ -1,5 +1,5 @@
 export type Category = 'yuyitos' | 'accesorios' | 'combos' ;
-export type Subcategory = 'para mate' | 'para terere'| 'para gin tonic' | 'hierbas-puras' | 'mates' | 'bombillas' | 'despolvilladores' ;
+export type Subcategory = 'para mate' | 'para tereré'| 'para gin tonic' | 'hierbas puras' | 'mates' | 'bombillas' | 'despolvilladores' ;
 
 export type Product = {
   id: string
@@ -50,24 +50,63 @@ export const products: Product[] = [
     description: 'Mezcla de hierbas y flores especialmente seleccionadas para realzar el sabor de tu gin tonic. Ingredientes: anis estrellado, coco' ,
     featured: true
   },
-  // { id: '', 
-  //   title: 'Mix Relax Total', 
-  //   price: 1000, 
-  //   category: 'yuyitos', 
-  //   subcategory: 'para mate', 
-  //   images:[ '/placeholder/Mix_Relax_Total.jpg','/placeholder/Anillo_Dual2.jpg'], 
-  //   description: 'Anillo de acero dorado con un diseño moderno de bandas múltiples que se cruzan y entrelazan en la parte frontal. Las bandas son lisas, redondeadas y tienen un acabado pulido brillante, creando un efecto de profundidad y movimiento.' , 
-  // },
-  // { id: '', 
-  //   title: 'Hierba Pura de Menta', 
-  //   price: 1000, 
-  //   category: 'yuyitos', 
-  //   subcategory: 'hierbas-puras', 
-  //   images:[ '/placeholder/Hierba_Pura_de_Menta.jpg','/placeholder/Anillo_Dual2.jpg'], 
-  //   description: 'Anillo de acero dorado con un diseño moderno de bandas múltiples que se cruzan y entrelazan en la parte frontal. Las bandas son lisas, redondeadas y tienen un acabado pulido brillante, creando un efecto de profundidad y movimiento.' , 
-  // }
+  { id: 'mx-hierbas-05', 
+    title: 'Mix ', 
+    price: 1300, 
+    category: 'yuyitos', 
+    subcategory: 'hierbas puras', 
+    images:[ '/placeholder/Mix_hierbas.jpg'], 
+    description: '' , 
+  },
+  { id: 'mx-hierbas-06', 
+    title: 'Mix Floral "Serenidad"', 
+    price: 3800, 
+    category: 'yuyitos', 
+    subcategory: 'para mate', 
+    images:[ '/placeholder/Mix_Floral.jpg'], 
+    description: 'Este mix floral, equilibrado y armonioso, es ideal para acompañar momentos de calma y conexión. Se compone de una infusión natural con ingredientes como siempreviva, rosa mosqueta, manzanilla, flor de tilo, pétalos de rosa, caléndula, coco en escamas y naranja. Su contenido es de 50 g.' , 
+  }
+  ,{ id: 'mx-hierbas-07', 
+    title: 'Mix Herbal "Refrescante"', 
+    price: 3800, 
+    category: 'yuyitos', 
+    subcategory: 'para mate',
+    images:[ '/placeholder/Mix_Herbal.jpg'],  
+    description: 'Esta infusión natural ha sido creada para brindar frescura y bienestar. Contiene una mezcla revitalizante de menta, cedrón, eucalipto, yerba lucero, boldo, poleo, burrito y anís estrellado. El contenido es de 50 g.' ,
+  },
+  { id: 'mx-hierbas-08', 
+    title: 'Mix Relajante',
+    price: 3800,
+    category: 'yuyitos',
+    subcategory: 'para mate',
+    images:[ '/placeholder/Mix_Relajante.jpg'],
+    description: 'Este mix ha sido especialmente formulado para calmar la ansiedad, mejorar la calidad del sueño y relajar tanto el cuerpo como la mente. Sus ingredientes incluyen tilo, pasiflora, melisa, manzanilla, cedrón y pétalos de rosa. El contenido es de 50 g.' ,
+  }
+  ,{ id: 'mx-hierbas-09', 
+    title: 'Mix Relajante',
+    price: 3800,
+    category: 'yuyitos',
+    subcategory: 'para tereré',
+    images:[ '/placeholder/Mix_Relajante.jpg'],
+    description: 'Este mix ha sido especialmente formulado para calmar la ansiedad, mejorar la calidad del sueño y relajar tanto el cuerpo como la mente. Sus ingredientes incluyen tilo, pasiflora, melisa, manzanilla, cedrón y pétalos de rosa. El contenido es de 50 g.' ,
+  }
+  ,{ 
+    id: 'mx-hierbas-10', 
+    title: 'Ruleta de Yuyitos', 
+    price: 15000, // ¡Importante: El precio es un ejemplo, debes cambiarlo!
+    category: 'yuyitos', 
+    subcategory: 'para mate', 
+    images:[ 
+      '/placeholder/_MG_2591.jpg', // Imagen con la tapa y sticker
+      '/placeholder/_MG_2684.jpg', // Vista desde arriba
+      '/placeholder/_MG_2693.jpg'  // Vista en perspectiva
+    ], 
+    description: 'Una experiencia única para los amantes de las infusiones. Nuestra Ruleta de Yuyitos es una selección especial de 6 hierbas y flores para que puedas explorar, combinar y crear tus propias mezclas. Ideal para regalar o para llevar tu ritual del mate a otro nivel. Contiene una variedad de sabores y aromas como lavanda, hibiscus, manzanilla, entre otros, para personalizar cada momento.',
+    featured: true,
+    outOfStock: true
+  }
   //Accesorios///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  { id: 'mm-accesorios-01', 
+  ,{ id: 'mm-accesorios-01', 
     title: 'Mate Imperial Dorado', 
     price: 45000, 
     category: 'accesorios', 
@@ -101,6 +140,29 @@ export const products: Product[] = [
     subcategory: 'mates',
     images:[ '/placeholder/Mate_Viruela_Blanca2.jpg', '/placeholder/Mate_Viruela_Blanca3.jpg','/placeholder/Mate-Frase.jpg'], 
     description: 'Mate de calabaza forrado en cuero con virola de acero inoxidable bañada en dorado, grabada con la frase "Felicidad es disfrutar las pequeñas cosas de la vida". Un diseño elegante y tradicional que combina resistencia, estilo y la esencia del buen mate. Es ideal para acompañar tus infusiones con un toque de distinción y un mensaje inspirador.',
+  },
+  { 
+    id: 'mm-accesorios-05', 
+    title: 'Mate de Acero "Mañana será más bonito"', 
+    price: 13000, 
+    category: 'accesorios', 
+    subcategory: 'mates', 
+    images:[ 
+      '/placeholder/Mate_Acero.jpg',
+    ], 
+    description: 'Disfruta de tus mates con un toque de inspiración. Este mate de acero inoxidable con un elegante acabado en negro mate es práctico, duradero e higiénico. Cuenta con una virola de acero pulido y un grabado láser con la frase "Mañana será más bonito", perfecto para empezar el día con energía positiva. Al ser de acero, no necesita curado y es muy fácil de limpiar.',
+  },
+  { 
+    id: 'mm-accesorios-06', 
+    title: 'Mate de Acero "Siempre cree en ti"', 
+    price: 13000, 
+    category: 'accesorios', 
+    subcategory: 'mates', 
+    images:[ 
+      '/placeholder/Mate_Acero2.jpg',
+    ], 
+    description: 'Un mate para recordarte tu valor cada día. Este mate de acero inoxidable con un elegante acabado en negro mate es práctico, duradero e higiénico. Cuenta con una virola de acero pulido y un delicado grabado láser con la frase "Siempre cree en ti". Al ser de acero, no necesita curado y es muy fácil de limpiar.',
+
   },
   //Bombillas de acero inoxidable
   { id: 'bb-accesorios-01', 
@@ -205,4 +267,30 @@ export const products: Product[] = [
     featured: true
   }
   //Combos///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ,{ id: 'cb-combos-01', 
+    title: 'Combo Bombilla Mariposa Celeste + Mix Calma Profunda', 
+    price: 10000, 
+    category: 'combos', 
+    subcategory: 'para mate', 
+    images:[ '/placeholder/Combo.jpg'], 
+    description: 'Este combo incluye una bombilla de metal decorada con una mariposa celeste y un mix de hierbas "Calma Profunda". La bombilla mide 19 cm y presenta un diseño fresco y vibrante, mientras que el mix es una infusión natural ideal para momentos de estrés y ansiedad. Una combinación perfecta para disfrutar de un mate relajante con estilo.' ,
+    featured: true
+  },
 ]
+
+export const subcategoriesByCategory: Record<Category, { key: Subcategory, label: string }[]> = {
+  yuyitos: [
+    { key: 'para mate', label: 'Para Mate' },
+    { key: 'para tereré', label: 'Para Tereré' },
+    { key: 'para gin tonic', label: 'Para Gin Tonic' },
+    { key: 'hierbas puras', label: 'Hierbas Puras' },
+  ],
+  accesorios: [
+    { key: 'mates', label: 'Mates' },
+    { key: 'bombillas', label: 'Bombillas' },
+    { key: 'despolvilladores', label: 'Despolvilladores' },
+  ],
+  combos: [
+    { key: 'para mate', label: 'Para Mate' },
+  ]
+}

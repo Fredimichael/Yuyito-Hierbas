@@ -1,14 +1,17 @@
 "use client"
 
 import { useState } from "react"
-// import { banners } from "@/data/banners" // Eliminar esta línea
 import Image from "next/image"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
+// 👇 1. Actualizar el tipo para que coincida con la nueva estructura de datos
 type Banner = {
-  image: string
+  image: {
+    mobile: string
+    desktop: string
+  }
   alt: string
   href: string
 }
@@ -40,18 +43,27 @@ export default function BannerCarousel({ images }: BannerCarouselProps) {
           className="absolute w-full h-full"
         >
           <Link href={images[current].href}>
+            {/* 👇 2. Imagen para Móvil (visible por defecto, oculta en md y superior) */}
             <Image
-              src={images[current].image}
+              src={images[current].image.mobile}
               alt={images[current].alt}
               fill
-              className="object-cover cursor-pointer"
+              className="object-cover cursor-pointer md:hidden"
+              priority
+            />
+            {/* 👇 3. Imagen para Escritorio (oculta por defecto, visible en md y superior) */}
+            <Image
+              src={images[current].image.desktop}
+              alt={images[current].alt}
+              fill
+              className="object-cover cursor-pointer hidden md:block"
               priority
             />
           </Link>
         </motion.div>
       </AnimatePresence>
 
-      {/* Botón Anterior */}
+      {/* Botones y Navegación (sin cambios) */}
       <button
         onClick={prevSlide}
         className="absolute left-3 top-1/2 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full hover:bg-black/60 transition"
@@ -59,7 +71,6 @@ export default function BannerCarousel({ images }: BannerCarouselProps) {
         <ChevronLeft size={24} />
       </button>
 
-      {/* Botón Siguiente */}
       <button
         onClick={nextSlide}
         className="absolute right-3 top-1/2 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full hover:bg-black/60 transition"
@@ -67,7 +78,6 @@ export default function BannerCarousel({ images }: BannerCarouselProps) {
         <ChevronRight size={24} />
       </button>
 
-      {/* Indicadores (puntitos) */}
       <div className="absolute bottom-3 w-full flex justify-center gap-2">
         {images.map((_, i) => (
           <button
