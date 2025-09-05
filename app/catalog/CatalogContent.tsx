@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Filters from '@/components/Filters'
 import ProductGrid from '@/components/ProductGrid'
-import { products as data, type Product } from '@/data/products'
+import { products as data, type Product, type Subcategory } from '@/data/products'
 
 export default function CatalogContent() {
   const [items, setItems] = useState<Product[]>(data)
@@ -12,7 +12,9 @@ export default function CatalogContent() {
   useEffect(() => {
     const subcat = searchParams.get('subcat')
     if (subcat) {
-      setItems(data.filter(p => p.subcategory === subcat))
+      // 👇 AQUÍ ESTÁ EL CAMBIO 👇
+      // Usamos .includes() para buscar el 'subcat' dentro del array p.subcategory
+      setItems(data.filter(p => p.subcategory.includes(subcat as Subcategory)))
     } else {
       setItems(data)
     }
