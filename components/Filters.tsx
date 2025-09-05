@@ -32,15 +32,23 @@ export default function Filters({ data, onChange }: { data: Product[], onChange:
 
   const filtered = useMemo(() => {
     let result = data.filter(p => {
+      // Filter by category
       if (cat !== 'all' && p.category !== cat) return false
-      if (sub !== 'all' && p.subcategory !== sub) return false
+
+      // Filter by subcategory (the key change)
+      if (sub !== 'all' && !p.subcategory.includes(sub)) return false
+
+      // Filter by search query
       if (q && !p.title.toLowerCase().includes(q.toLowerCase())) return false
+
       return true
     })
+    
+    // Sort results by price
     result = result.sort((a, b) => order === 'asc' ? a.price - b.price : b.price - a.price)
+    
     return result
   }, [data, cat, sub, q, order])
-
   useEffect(() => { 
     onChange(filtered)
   }, [filtered, onChange])
