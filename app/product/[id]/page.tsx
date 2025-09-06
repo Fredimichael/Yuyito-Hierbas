@@ -8,8 +8,14 @@ export default function ProductPage({ params }: { params: { id: string } }) {
   const product = products.find(p => p.id === params.id)
   if (!product) return notFound()
 
+  // 👇 LÓGICA CORREGIDA AQUÍ 👇
   const recommended = products
-    .filter(p => p.subcategory === product.subcategory && p.id !== product.id)
+    .filter(p => {
+      // Excluir el producto actual
+      if (p.id === product.id) return false;
+      // Comprobar si hay al menos una subcategoría en común
+      return p.subcategory.some(sub => product.subcategory.includes(sub));
+    })
     .slice(0, 4)
 
   return (
