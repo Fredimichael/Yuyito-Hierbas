@@ -83,10 +83,10 @@ export const products: Product[] = [
     images: ['/placeholder/Mix_Relajante.jpg'],
     description: 'Este mix ha sido especialmente formulado para calmar la ansiedad, mejorar la calidad del sueño y relajar tanto el cuerpo como la mente. Sus ingredientes incluyen tilo, pasiflora, melisa, manzanilla, cedrón y pétalos de rosa. El contenido es de 50 g.' ,
 }
-,{
+  ,{ 
     id: 'mx-hierbas-10',
     title: 'Ruleta de Yuyitos',
-    price: 15000, // ¡Importante: El precio es un ejemplo, debes cambiarlo!
+    price: 7200, // ¡Importante: El precio es un ejemplo, debes cambiarlo!
     category: 'yuyitos',
     subcategory: ['para mate', 'hierbas puras'],
     images:[
@@ -96,8 +96,7 @@ export const products: Product[] = [
     ],
     description: 'Una experiencia única para explorar sabores. Nuestra Ruleta de Yuyitos es una selección especial de 6 hierbas y flores para que puedas crear tus propias mezclas. Ideal para regalar o para llevar tu ritual del mate a otro nivel. Importante: La selección de hierbas puede variar según la disponibilidad de stock, ¡pero siempre te llevarás una combinación increíble!',
     featured: true
-  },
-  
+  }
   //Accesorios///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   ,{ id: 'mm-accesorios-01', 
     title: 'Mate Imperial Dorado', 
