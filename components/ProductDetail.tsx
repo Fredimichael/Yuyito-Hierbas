@@ -5,11 +5,20 @@ import toast from 'react-hot-toast'
 import { useCart } from '@/context/CartContext'
 import type { Product } from '@/data/products'
 
+// 👇 1. AÑADIMOS LA MISMA FUNCIÓN AUXILIAR DE ANTES 👇
+function formatSubcategoryLabels(subcategories: string[]) {
+  const labels = subcategories.map(sub =>
+    sub.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
+  );
+  return labels.join(' - ');
+}
+
 export default function ProductDetail({ product }: { product: Product }) {
   const { add } = useCart()
   const [active, setActive] = useState(0)
 
   const images = product.images && product.images.length > 0 ? product.images : []
+  const formattedCategory = product.category.charAt(0).toUpperCase() + product.category.slice(1);
 
   return (
     <div className="grid md:grid-cols-2 gap-8">
@@ -29,7 +38,8 @@ export default function ProductDetail({ product }: { product: Product }) {
       </div>
       <div className="flex flex-col gap-4">
         <h1 className="font-heading text-3xl">{product.title}</h1>
-        <p className="opacity-70 capitalize">{product.category.replace('-', ' ')} — {product.subcategory}</p>
+        {/* 👇 2. USAMOS LA FUNCIÓN PARA MOSTRAR LAS SUBCATEGORÍAS FORMATEADAS 👇 */}
+        <p className="opacity-70">{formattedCategory} — {formatSubcategoryLabels(product.subcategory)}</p>
         <p className="opacity-90">{product.description}</p>
         <p className="text-2xl font-semibold">${product.price.toFixed(0)}</p>
         <div className="flex gap-3">
