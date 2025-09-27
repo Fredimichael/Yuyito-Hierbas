@@ -43,7 +43,7 @@ export const products: Product[] = [
   },
   { id: 'mx-hierbas-04', 
     title: 'Mix Gin Tonic',
-    price: 1000, 
+    price: 1800, 
     category: 'yuyitos', 
     subcategory: ['para gin tonic', ],
     images:[ '/placeholder/Mix_Gin_Tonic1.jpg','/placeholder/Mix_Gin_Tonic2.jpg'], 
@@ -86,16 +86,26 @@ export const products: Product[] = [
   ,{ 
     id: 'mx-hierbas-10',
     title: 'Ruleta de Yuyitos',
-    price: 7200, // ¡Importante: El precio es un ejemplo, debes cambiarlo!
+    price: 7200, 
     category: 'yuyitos',
     subcategory: ['para mate', 'hierbas puras'],
     images:[
-      '/placeholder/_MG_2591.jpg', // Imagen con la tapa
-      '/placeholder/_MG_2684.jpg', // Vista cenital
-      '/placeholder/_MG_2693.jpg'  // Vista en perspectiva
+      '/placeholder/_MG_2591.jpg', 
+      '/placeholder/_MG_2684.jpg', 
+      '/placeholder/_MG_2693.jpg'  
     ],
     description: 'Una experiencia única para explorar sabores. Nuestra Ruleta de Yuyitos es una selección especial de 6 hierbas y flores para que puedas crear tus propias mezclas. Ideal para regalar o para llevar tu ritual del mate a otro nivel. Importante: La selección de hierbas puede variar según la disponibilidad de stock, ¡pero siempre te llevarás una combinación increíble!',
     featured: true
+  },
+  {
+    id: 'mx-hierbas-11',
+    title: 'Mix Gin Tonic',
+    price: 1800,
+    category: 'yuyitos',
+    subcategory: ['para gin tonic'],
+    images: ['/placeholder/MIX_GIN_TONIC2.jpg', '/placeholder/MIX_GIN_TONIC1.jpg', '/placeholder/MIX_GIN_TONIC3.jpg', '/placeholder/MIX_GIN_TONIC4.jpg', '/placeholder/MIX_GIN_TONIC5.jpg'],
+    description: 'Mezcla de hierbas y flores especialmente seleccionadas para realzar el sabor de tu gin tonic. Los ingredientes varian según la disponibilidad de stock, pero siempre incluyen una combinación única y deliciosa. ¡Experimenta y descubre nuevas sensaciones en cada copa!' ,
+
   }
   //Accesorios///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   ,{ id: 'mm-accesorios-01', 
