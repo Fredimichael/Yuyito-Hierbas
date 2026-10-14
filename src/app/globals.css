@@ -1,0 +1,509 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-deep: #05080e;
+    --glass-bg: rgba(255, 255, 255, 0.12);
+    --glass-border: rgba(255, 255, 255, 0.35);
+    --glass-highlight: rgba(255, 255, 255, 0.75);
+    --accent-emerald: #10b981;
+    --accent-cyan: #06b6d4;
+  }
+
+  body {
+    background-color: var(--bg-deep);
+    color: #f3f4f6;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: rgba(16, 185, 129, 0.3);
+    color: #ffffff;
+  }
+}
+
+.font-navbar {
+  font-family: var(--font-outfit), "Outfit", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+/* ==========================================================================
+   LIQUID GLASS SYSTEM (Reference Image Match: Specular Highlights & Deep Blur)
+   ========================================================================== */
+
+/* 1. Master Glass Card / Outer Shell */
+.glass-card,
+.ios-glass-card {
+  background: linear-gradient(140deg,
+      rgba(255, 255, 255, 0.22) 0%,
+      rgba(255, 255, 255, 0.05) 45%,
+      rgba(255, 255, 255, 0.12) 100%);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  box-shadow:
+    0 30px 65px -12px rgba(0, 0, 0, 0.55),
+    0 12px 24px -8px rgba(0, 0, 0, 0.35),
+    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.75),
+    inset 0 -1.5px 2px 0 rgba(255, 255, 255, 0.12);
+  position: relative;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover,
+.ios-glass-card:hover {
+  border-color: rgba(255, 255, 255, 0.55);
+  box-shadow:
+    0 40px 80px -12px rgba(0, 0, 0, 0.65),
+    0 16px 32px -8px rgba(0, 0, 0, 0.4),
+    inset 0 2px 2.5px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1.5px 2px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* 1.1 Product Card Dark Glass (Exclusive to Product Grid / Product Cards) */
+.product-glass-card {
+  background: linear-gradient(140deg,
+      rgba(15, 23, 35, 0.88) 0%,
+      rgba(10, 16, 26, 0.76) 45%,
+      rgba(5, 9, 16, 0.90) 100%);
+  backdrop-filter: blur(32px) saturate(190%);
+  -webkit-backdrop-filter: blur(32px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow:
+    0 30px 65px -12px rgba(0, 0, 0, 0.75),
+    0 12px 24px -8px rgba(0, 0, 0, 0.5),
+    inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.25),
+    inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.5);
+  position: relative;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.product-glass-card:hover {
+  background: linear-gradient(140deg,
+      rgba(20, 30, 46, 0.92) 0%,
+      rgba(13, 20, 32, 0.82) 45%,
+      rgba(7, 12, 20, 0.94) 100%);
+  border-color: rgba(255, 255, 255, 0.32);
+  box-shadow:
+    0 40px 80px -12px rgba(0, 0, 0, 0.85),
+    0 16px 32px -8px rgba(0, 0, 0, 0.6),
+    inset 0 2px 2px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.6);
+}
+
+/* 2. Inner Glass Trays / Panels */
+.glass-panel,
+.glass-tray,
+.ios-glass-tray {
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.14) 0%,
+      rgba(255, 255, 255, 0.04) 100%);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow:
+    inset 0 1px 1.5px rgba(255, 255, 255, 0.45),
+    0 6px 20px rgba(0, 0, 0, 0.15);
+  transition: all 0.25s ease;
+}
+
+.glass-panel:hover,
+.glass-tray:hover,
+.ios-glass-tray:hover {
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.18) 0%,
+      rgba(255, 255, 255, 0.06) 100%);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* 3. Floating Glass Navigation Dock */
+.glass-dock,
+.ios-glass-dock {
+  background: linear-gradient(140deg,
+      rgba(20, 28, 38, 0.55) 0%,
+      rgba(10, 15, 24, 0.4) 100%);
+  backdrop-filter: blur(36px) saturate(200%);
+  -webkit-backdrop-filter: blur(36px) saturate(200%);
+  border: 1.2px solid rgba(255, 255, 255, 0.35);
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.5),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.7),
+    inset 0 -1px 2px rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+/* 4. Glass Pills (Category buttons, Badges, Filter chips) */
+.glass-pill,
+.ios-glass-pill {
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.16) 0%,
+      rgba(255, 255, 255, 0.05) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.15),
+    inset 0 1px 1px rgba(255, 255, 255, 0.5);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-pill:hover,
+.ios-glass-pill:hover,
+.glass-pill.active,
+.ios-glass-pill.active {
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.3) 0%,
+      rgba(255, 255, 255, 0.12) 100%);
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.25),
+    0 0 18px rgba(255, 255, 255, 0.25),
+    inset 0 1.5px 1.5px rgba(255, 255, 255, 0.75);
+}
+
+/* Category Glass Pills Navigation */
+.glass-category-active,
+.ios-glass-category-active {
+  background: linear-gradient(135deg,
+      rgba(16, 185, 129, 0.28) 0%,
+      rgba(5, 150, 105, 0.12) 100%);
+  backdrop-filter: blur(48px) saturate(190%);
+  -webkit-backdrop-filter: blur(48px) saturate(190%);
+  border-radius: 9999px;
+  border: 1px solid rgba(52, 211, 153, 0.55);
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.25),
+    0 0 16px rgba(16, 185, 129, 0.3),
+    inset 0 1px 1px rgba(255, 255, 255, 0.7),
+    inset 0 0 12px rgba(16, 185, 129, 0.15);
+  color: #ffffff;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-category-active:hover,
+.ios-glass-category-active:hover {
+  background: linear-gradient(135deg,
+      rgba(16, 185, 129, 0.38) 0%,
+      rgba(5, 150, 105, 0.18) 100%);
+  border-color: rgba(110, 231, 183, 0.8);
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(16, 185, 129, 0.4),
+    inset 0 1.5px 1.5px rgba(255, 255, 255, 0.85);
+}
+
+.glass-category-inactive,
+.ios-glass-category-inactive {
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.12) 0%,
+      rgba(255, 255, 255, 0.04) 100%);
+  backdrop-filter: blur(36px) saturate(190%);
+  -webkit-backdrop-filter: blur(36px) saturate(190%);
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.15),
+    inset 0 1px 1px rgba(255, 255, 255, 0.45);
+  color: rgba(255, 255, 255, 0.75);
+  font-weight: 600;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-category-inactive:hover,
+.ios-glass-category-inactive:hover {
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.22) 0%,
+      rgba(255, 255, 255, 0.08) 100%);
+  border-color: rgba(255, 255, 255, 0.45);
+  color: #ffffff;
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.2),
+    inset 0 1.5px 1.5px rgba(255, 255, 255, 0.65);
+}
+
+/* Emerald Glass Pill */
+.glass-pill-emerald,
+.ios-glass-pill-emerald {
+  background: linear-gradient(135deg,
+      rgba(16, 185, 129, 0.32) 0%,
+      rgba(5, 150, 105, 0.16) 100%);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(52, 211, 153, 0.45);
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.2),
+    inset 0 1px 1px rgba(255, 255, 255, 0.55),
+    inset 0 0 12px rgba(16, 185, 129, 0.18);
+  color: #a7f3d0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-pill-emerald:hover,
+.ios-glass-pill-emerald:hover,
+.group:hover .ios-glass-pill-emerald {
+  background: linear-gradient(135deg,
+      rgba(16, 185, 129, 0.38) 0%,
+      rgba(5, 150, 105, 0.18) 100%);
+  border-color: rgba(110, 231, 183, 0.65);
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.3),
+    0 0 18px rgba(16, 185, 129, 0.35),
+    inset 0 1.5px 1.5px rgba(255, 255, 255, 0.75);
+  color: #ffffff;
+}
+
+/* Ruby / Red Glass Pill (Out of stock & Discount badges) */
+.glass-pill-ruby,
+.ios-glass-pill-ruby {
+  background: linear-gradient(135deg,
+      rgba(239, 68, 68, 0.45) 0%,
+      rgba(185, 28, 28, 0.28) 100%);
+  backdrop-filter: blur(20px) saturate(190%);
+  -webkit-backdrop-filter: blur(20px) saturate(190%);
+  border: 1px solid rgba(248, 113, 113, 0.55);
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.25),
+    inset 0 1px 1px rgba(255, 255, 255, 0.6),
+    inset 0 0 12px rgba(239, 68, 68, 0.2);
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-pill-ruby:hover,
+.ios-glass-pill-ruby:hover,
+.group:hover .ios-glass-pill-ruby {
+  background: linear-gradient(135deg,
+      rgba(239, 68, 68, 0.58) 0%,
+      rgba(185, 28, 28, 0.38) 100%);
+  border-color: rgba(252, 165, 165, 0.75);
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.3),
+    0 0 18px rgba(239, 68, 68, 0.4),
+    inset 0 1.5px 1.5px rgba(255, 255, 255, 0.8);
+  color: #ffffff;
+}
+
+/* Discount Glass Pill (Frosted glass with vivid red percentage and number) */
+.glass-pill-discount,
+.ios-glass-pill-discount {
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.22) 0%,
+      rgba(239, 68, 68, 0.12) 100%);
+  backdrop-filter: blur(20px) saturate(190%);
+  -webkit-backdrop-filter: blur(20px) saturate(190%);
+  border: 1px solid rgba(248, 113, 113, 0.55);
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.25),
+    inset 0 1px 1px rgba(255, 255, 255, 0.65),
+    inset 0 0 10px rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-pill-discount:hover,
+.ios-glass-pill-discount:hover,
+.group:hover .ios-glass-pill-discount {
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.32) 0%,
+      rgba(239, 68, 68, 0.22) 100%);
+  border-color: rgba(252, 165, 165, 0.75);
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.3),
+    0 0 18px rgba(239, 68, 68, 0.35),
+    inset 0 1.5px 1.5px rgba(255, 255, 255, 0.8);
+  color: #ff4d4d;
+}
+
+/* Amber / Golden Glass Pill (Badge, Featured) */
+.glass-pill-amber,
+.ios-glass-pill-amber {
+  background: linear-gradient(135deg,
+      rgba(245, 158, 11, 0.42) 0%,
+      rgba(180, 83, 9, 0.25) 100%);
+  backdrop-filter: blur(20px) saturate(190%);
+  -webkit-backdrop-filter: blur(20px) saturate(190%);
+  border: 1px solid rgba(251, 191, 36, 0.55);
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.25),
+    inset 0 1px 1px rgba(255, 255, 255, 0.6),
+    inset 0 0 10px rgba(245, 158, 11, 0.2);
+  color: #fef08a;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-pill-amber:hover,
+.ios-glass-pill-amber:hover,
+.group:hover .ios-glass-pill-amber {
+  background: linear-gradient(135deg,
+      rgba(245, 158, 11, 0.55) 0%,
+      rgba(180, 83, 9, 0.35) 100%);
+  border-color: rgba(252, 211, 77, 0.75);
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.3),
+    0 0 18px rgba(245, 158, 11, 0.4),
+    inset 0 1.5px 1.5px rgba(255, 255, 255, 0.8);
+  color: #ffffff;
+}
+
+/* 5. Luminous Milky Glass Button (Exact "Get Started" Reference Match) */
+.ios-glass-milky-btn,
+.glass-button-milky {
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.94) 0%,
+      rgba(235, 248, 240, 0.82) 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow:
+    0 14px 32px -5px rgba(0, 0, 0, 0.35),
+    0 4px 12px rgba(0, 0, 0, 0.12),
+    inset 0 2px 2px rgba(255, 255, 255, 1),
+    inset 0 -1.5px 2px rgba(0, 0, 0, 0.08);
+  color: #082015;
+  font-weight: 800;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ios-glass-milky-btn:hover,
+.glass-button-milky:hover {
+  background: linear-gradient(180deg,
+      #ffffff 0%,
+      rgba(240, 252, 245, 0.95) 100%);
+  border-color: #ffffff;
+  transform: translateY(-1.5px) scale(1.015);
+  box-shadow:
+    0 20px 45px -5px rgba(0, 0, 0, 0.45),
+    0 0 30px rgba(255, 255, 255, 0.45),
+    inset 0 2px 2px rgba(255, 255, 255, 1);
+}
+
+.ios-glass-milky-btn:active,
+.glass-button-milky:active {
+  transform: translateY(0.5px) scale(0.985);
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.3),
+    inset 0 1px 1px rgba(255, 255, 255, 0.8);
+}
+
+/* 6. Glass Icon Button (Floating circular controls) */
+.glass-icon-btn,
+.ios-glass-icon-btn {
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.24) 0%,
+      rgba(255, 255, 255, 0.08) 100%);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow:
+    0 10px 25px -5px rgba(0, 0, 0, 0.35),
+    inset 0 1.5px 1.5px rgba(255, 255, 255, 0.75);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-icon-btn:hover,
+.ios-glass-icon-btn:hover {
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.38) 0%,
+      rgba(255, 255, 255, 0.16) 100%);
+  border-color: rgba(255, 255, 255, 0.7);
+  transform: scale(1.08);
+  box-shadow:
+    0 15px 30px -5px rgba(0, 0, 0, 0.45),
+    0 0 20px rgba(255, 255, 255, 0.35),
+    inset 0 1.5px 1.5px rgba(255, 255, 255, 0.9);
+}
+
+.glass-icon-btn:active,
+.ios-glass-icon-btn:active {
+  transform: scale(0.94);
+}
+
+/* 7. Regular Frosted Glass Button */
+.glass-button,
+.ios-glass-button {
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(255, 255, 255, 0.06) 100%);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.25),
+    inset 0 1.5px 1.5px rgba(255, 255, 255, 0.6);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-button:hover,
+.ios-glass-button:hover {
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.3) 0%,
+      rgba(255, 255, 255, 0.12) 100%);
+  border-color: rgba(255, 255, 255, 0.55);
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.35),
+    0 0 18px rgba(255, 255, 255, 0.2),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.8);
+  transform: translateY(-1px);
+}
+
+.glass-button:active,
+.ios-glass-button:active {
+  transform: scale(0.97);
+}
+
+/* 8. Emerald Glass Button */
+.glass-button-primary {
+  background: linear-gradient(135deg,
+      rgba(16, 185, 129, 0.88) 0%,
+      rgba(5, 150, 105, 0.92) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow:
+    0 12px 28px -5px rgba(16, 185, 129, 0.55),
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.7);
+  color: white;
+  transition: all 0.25s ease;
+}
+
+.glass-button-primary:hover {
+  background: linear-gradient(135deg,
+      rgba(16, 185, 129, 0.98) 0%,
+      rgba(5, 150, 105, 1) 100%);
+  border-color: rgba(255, 255, 255, 0.7);
+  box-shadow:
+    0 16px 36px -5px rgba(16, 185, 129, 0.75),
+    0 0 25px rgba(16, 185, 129, 0.45),
+    inset 0 2px 2.5px rgba(255, 255, 255, 0.9);
+  transform: translateY(-1px) scale(1.01);
+}
+
+/* Custom sleek scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+  background-clip: padding-box;
+}
