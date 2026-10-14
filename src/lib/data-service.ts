@@ -3,7 +3,7 @@ import { INITIAL_BANNERS, INITIAL_CATEGORIES, INITIAL_PRODUCTS } from "./constan
 import { isSupabaseConfigured, supabase } from "./supabase";
 
 const STORAGE_KEY_PRODUCTS = "yuyito_hierbas_products_v2";
-const STORAGE_KEY_BANNERS = "yuyito_hierbas_banners_v2";
+const STORAGE_KEY_BANNERS = "yuyito_hierbas_banners_v3";
 const STORAGE_KEY_CATEGORIES = "yuyito_hierbas_categories_v2";
 
 // Helper para obtener datos locales en caso de no tener Supabase configurado
