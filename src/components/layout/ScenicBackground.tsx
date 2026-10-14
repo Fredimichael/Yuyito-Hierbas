@@ -7,20 +7,17 @@ import Image from "next/image";
 // 1. TODAS LAS IMÁGENES DE public/images/
 // =========================================================================
 const BACKGROUND_SCENES = [
-  { id: "img-1", src: "/banners/Mates.png" },
-  { id: "img-2", src: "/banners/Variedad.png" },
-  { id: "img-3", src: "/banners/Frase.png" },
-  { id: "img-4", src: "/banners/Sumate-a-Yuyito.png" },
+  { id: "img-1", src: "/images/herbs/hierbas-1.webp" },
+  { id: "img-2", src: "/images/herbs/hierbas-2.webp" },
+  { id: "img-3", src: "/images/herbs/hierbas-3.webp" },
+  { id: "img-4", src: "/images/herbs/hierbas-4.webp" },
+  { id: "img-5", src: "/images/herbs/hierbas-5.webp" },
 ];
 
 // =========================================================================
-// 2. AJUSTES DE OPACIDAD Y NITIDEZ (Podés cambiar estos valores directamente):
+// 2. AJUSTES DE OPACIDAD Y NITIDEZ:
 // =========================================================================
-// OVERLAY_DARKNESS: Nivel de oscuridad sobre las fotos.
-// 0.15 = Muy clara y viva (fotos súper visibles)
-// 0.30 = Equilibrada (recomendado)
-// 0.60 = Más oscura
-const OVERLAY_DARKNESS = 0.25; // <-- LINEA 25: Cambiá este número (ej: 0.15, 0.20, 0.35)
+const OVERLAY_DARKNESS = 0.35;
 
 // IMAGE_OPACITY: Opacidad propia de la imagen activa (1 = 100% visible)
 const IMAGE_OPACITY = 1; // <-- LINEA 28: Cambiá entre 0.5 y 1 según prefieras
