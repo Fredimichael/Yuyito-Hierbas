@@ -2,9 +2,10 @@
 
 import React from "react";
 import Image from "next/image";
-import { MessageCircle, Share2, Sparkles } from "lucide-react";
+import { MessageCircle, Share2, Sparkles, ShoppingBag, Check, Plus } from "lucide-react";
 import { Product } from "@/types";
 import { formatPrice, createWhatsAppMessage, getWhatsAppShareUrl, getCatalogShareUrl, isProductNew, getProductWhatsAppPhone } from "@/lib/utils";
+import { useCart } from "@/context/CartContext";
 
 interface ProductCardProps {
   product: Product;
@@ -13,6 +14,9 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product, onSelect, onShare }: ProductCardProps) {
+  const { addToCart, lastAddedProduct } = useCart();
+  const isRecentlyAdded = lastAddedProduct?.id === product.id;
+
   const mainImage = product.images && product.images.length > 0
     ? product.images[0]
     : "https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=800&q=80";
@@ -28,11 +32,10 @@ export function ProductCard({ product, onSelect, onShare }: ProductCardProps) {
 
   const productUrl = getCatalogShareUrl(`/producto/${product.id}`);
 
-  const handleWhatsAppClick = (e: React.MouseEvent) => {
+  const handleAddToCart = (e: React.MouseEvent) => {
     e.stopPropagation();
-    const phone = getProductWhatsAppPhone(product);
-    const msg = createWhatsAppMessage(product.title, product.price, productUrl);
-    window.open(getWhatsAppShareUrl(phone, msg), "_blank");
+    if (!product.in_stock) return;
+    addToCart(product, 1);
   };
 
   const handleShareClick = (e: React.MouseEvent) => {
@@ -113,12 +116,28 @@ export function ProductCard({ product, onSelect, onShare }: ProductCardProps) {
           )}
 
           <button
-            onClick={handleWhatsAppClick}
-            className="flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white text-[10px] sm:text-xs font-bold shadow-[0_4px_16px_rgba(16,185,129,0.55)] border border-emerald-400/40 hover:scale-105 active:scale-90 transition-all cursor-pointer"
-            title="Consultar por WhatsApp"
+            onClick={handleAddToCart}
+            disabled={!product.in_stock}
+            className={`flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-full text-[10px] sm:text-xs font-bold shadow-lg border transition-all cursor-pointer ${
+              !product.in_stock
+                ? "bg-white/10 text-white/40 border-white/10 cursor-not-allowed"
+                : isRecentlyAdded
+                ? "bg-emerald-600 text-white border-emerald-300 scale-105 shadow-[0_0_20px_rgba(16,185,129,0.7)]"
+                : "bg-emerald-500 hover:bg-emerald-400 text-white border-emerald-400/40 hover:scale-105 active:scale-90 shadow-[0_4px_16px_rgba(16,185,129,0.55)]"
+            }`}
+            title={product.in_stock ? "Agregar al pedido" : "Producto agotado"}
           >
-            <MessageCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white fill-white/20" />
-            <span>Consultar</span>
+            {isRecentlyAdded ? (
+              <>
+                <Check className="w-3.5 h-3.5 text-white" />
+                <span>¡Agregado!</span>
+              </>
+            ) : (
+              <>
+                <Plus className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" />
+                <span>Agregar</span>
+              </>
+            )}
           </button>
         </div>
       </div>

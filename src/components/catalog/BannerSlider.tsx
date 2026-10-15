@@ -50,9 +50,8 @@ export function BannerSlider({ banners }: BannerSliderProps) {
               priority={index === 0}
               className="object-cover object-center transform scale-105 group-hover:scale-100 transition-transform duration-1000"
             />
-            {/* Apple style liquid gradient overlays */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/45 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/20 to-transparent hidden sm:block" />
+            {/* Sutil overlay de mínima opacidad */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-black/10 to-transparent" />
           </div>
         ))}
 
@@ -69,7 +68,7 @@ export function BannerSlider({ banners }: BannerSliderProps) {
           </h2>
 
           {currentBanner.subtitle && (
-            <p className="text-sm sm:text-base md:text-lg text-white/80 mb-6 max-w-2xl line-clamp-2 sm:line-clamp-3 leading-relaxed">
+            <p className="text-sm sm:text-base md:text-lg text-white/90 mb-6 max-w-2xl line-clamp-2 sm:line-clamp-3 leading-relaxed drop-shadow-md">
               {currentBanner.subtitle}
             </p>
           )}

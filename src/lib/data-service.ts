@@ -1,6 +1,7 @@
 import { Banner, Category, Product } from "@/types";
 import { INITIAL_BANNERS, INITIAL_CATEGORIES, INITIAL_PRODUCTS } from "./constants";
 import { isSupabaseConfigured, supabase } from "./supabase";
+import { convertImageToWebP } from "./image-utils";
 
 const STORAGE_KEY_PRODUCTS = "yuyito_hierbas_products_v2";
 const STORAGE_KEY_BANNERS = "yuyito_hierbas_banners_v3";
@@ -267,14 +268,24 @@ export const DataService = {
   },
 
   async uploadImage(file: File): Promise<string> {
+    // 1. Optimizar y convertir automáticamente a WebP antes de subir
+    const webpFile = await convertImageToWebP(file, {
+      maxWidth: 1600,
+      maxHeight: 1600,
+      quality: 0.82,
+    });
+
     if (this.isLiveDb() && supabase) {
-      const fileExt = file.name.split(".").pop();
-      const fileName = `${Date.now()}-${Math.random().toString(36).substring(2, 9)}.${fileExt}`;
+      const fileName = `${Date.now()}-${Math.random().toString(36).substring(2, 9)}.webp`;
       const filePath = `uploads/${fileName}`;
 
       const { error: uploadError } = await supabase.storage
         .from("catalog-media")
-        .upload(filePath, file);
+        .upload(filePath, webpFile, {
+          contentType: "image/webp",
+          cacheControl: "31536000",
+          upsert: true,
+        });
 
       if (uploadError) {
         throw new Error(uploadError.message);
@@ -287,12 +298,12 @@ export const DataService = {
       return data.publicUrl;
     }
 
-    // Si no hay Supabase, convertimos a base64 o data URL para demostración local
+    // Si no hay Supabase, convertimos el WebP optimizado a base64
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onloadend = () => resolve(reader.result as string);
       reader.onerror = reject;
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(webpFile);
     });
   }
 };

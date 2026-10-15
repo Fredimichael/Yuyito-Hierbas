@@ -117,7 +117,7 @@ export function ProductGrid({
         {/* Filter Controls Row: Category Pills + Sort + Stock Toggle */}
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 pt-2">
           {/* Categories Pill Navigation */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 w-full lg:w-auto scrollbar-none no-scrollbar">
+          <div className="flex items-center gap-2 overflow-x-auto py-1 w-full lg:w-auto scrollbar-none no-scrollbar">
             {categories.map((cat) => {
               const isActive = filterState.category.toLowerCase() === cat.slug.toLowerCase();
               return (

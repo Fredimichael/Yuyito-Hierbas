@@ -13,7 +13,11 @@ import {
   Sparkles,
   ChevronLeft,
   ChevronRight,
-  Sprout
+  Sprout,
+  ShoppingBag,
+  Plus,
+  Minus,
+  Check
 } from "lucide-react";
 import { Product } from "@/types";
 import { DataService } from "@/lib/data-service";
@@ -24,6 +28,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ScenicBackground } from "@/components/layout/ScenicBackground";
 import { ProductCard } from "@/components/catalog/ProductCard";
+import { useCart } from "@/context/CartContext";
 
 export default function ProductDetailPage() {
   const params = useParams();
@@ -34,6 +39,9 @@ export default function ProductDetailPage() {
   const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [quantity, setQuantity] = useState(1);
+  const [justAdded, setJustAdded] = useState(false);
+  const { addToCart, openCart } = useCart();
 
   // Share Modal State
   const [shareData, setShareData] = useState<{
@@ -334,23 +342,95 @@ export default function ProductDetailPage() {
               </div>
             </div>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-center gap-3.5 pt-4 border-t border-white/10">
-              <button
-                onClick={handleWhatsAppBuy}
-                className="glass-button-primary w-full sm:flex-1 py-4 sm:py-4.5 rounded-2xl flex items-center justify-center gap-3 font-extrabold text-sm sm:text-base shadow-2xl transition-all hover:scale-[1.02] cursor-pointer"
-              >
-                <MessageCircle className="w-5 h-5 text-white" />
-                <span>Pedir por WhatsApp</span>
-              </button>
+            {/* CTA Buttons & Cart Actions */}
+            <div className="space-y-4 pt-4 border-t border-white/10">
+              {product.in_stock ? (
+                <div className="flex flex-col sm:flex-row items-center gap-3">
+                  {/* Selector de cantidad */}
+                  <div className="flex items-center justify-between w-full sm:w-auto bg-white/10 rounded-2xl p-1.5 border border-white/15 shrink-0">
+                    <button
+                      onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                      className="w-11 h-11 rounded-xl flex items-center justify-center text-white/80 hover:text-white hover:bg-white/15 transition-all cursor-pointer"
+                      aria-label="Restar cantidad"
+                    >
+                      <Minus className="w-4 h-4" />
+                    </button>
+                    <span className="text-base font-extrabold px-5 min-w-[2.5rem] text-center">
+                      {quantity}
+                    </span>
+                    <button
+                      onClick={() => setQuantity((q) => q + 1)}
+                      className="w-11 h-11 rounded-xl flex items-center justify-center text-white/80 hover:text-white hover:bg-white/15 transition-all cursor-pointer"
+                      aria-label="Sumar cantidad"
+                    >
+                      <Plus className="w-4 h-4" />
+                    </button>
+                  </div>
 
-              <button
-                onClick={() => openShare(product.title, currentUrl, product.price, product.description)}
-                className="glass-button w-full sm:w-auto px-6 py-4 rounded-2xl flex items-center justify-center gap-2 text-sm font-semibold text-white/90 hover:text-white transition-all cursor-pointer"
-              >
-                <Share2 className="w-4 h-4 text-cyan-400" />
-                <span>Compartir / QR</span>
-              </button>
+                  {/* Botón principal: Agregar al carrito */}
+                  <button
+                    onClick={() => {
+                      addToCart(product, quantity);
+                      setJustAdded(true);
+                      setTimeout(() => setJustAdded(false), 2000);
+                    }}
+                    className={`flex-1 w-full py-4 sm:py-4.5 rounded-2xl flex items-center justify-center gap-3 font-extrabold text-sm sm:text-base shadow-2xl transition-all cursor-pointer ${
+                      justAdded
+                        ? "bg-emerald-600 text-white shadow-[0_0_25px_rgba(16,185,129,0.7)] scale-[1.02]"
+                        : "glass-button-primary hover:scale-[1.01] active:scale-[0.99]"
+                    }`}
+                  >
+                    {justAdded ? (
+                      <>
+                        <Check className="w-5 h-5 text-white" />
+                        <span>¡Agregado al Carrito!</span>
+                      </>
+                    ) : (
+                      <>
+                        <ShoppingBag className="w-5 h-5 text-white" />
+                        <span>
+                          Agregar al Carrito • {formatPrice(product.price * quantity)}
+                        </span>
+                      </>
+                    )}
+                  </button>
+                </div>
+              ) : (
+                <div className="w-full py-4 rounded-2xl bg-white/10 border border-white/10 text-center font-semibold text-white/50">
+                  Producto actualmente sin stock
+                </div>
+              )}
+
+              {/* Acciones Secundarias */}
+              <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
+                <button
+                  onClick={openCart}
+                  className="glass-button px-5 py-3 rounded-xl flex items-center gap-2 text-xs font-bold text-emerald-400 hover:text-white transition-all cursor-pointer"
+                >
+                  <ShoppingBag className="w-4 h-4" />
+                  <span>Ver Pedido / Finalizar</span>
+                </button>
+
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={handleWhatsAppBuy}
+                    className="glass-button px-4 py-3 rounded-xl flex items-center gap-2 text-xs font-semibold text-white/70 hover:text-white transition-all cursor-pointer"
+                    title="Consultar únicamente por este producto"
+                  >
+                    <MessageCircle className="w-4 h-4 text-emerald-400" />
+                    <span className="hidden sm:inline">Consultar por WhatsApp</span>
+                  </button>
+
+                  <button
+                    onClick={() => openShare(product.title, currentUrl, product.price, product.description)}
+                    className="glass-button px-4 py-3 rounded-xl flex items-center gap-2 text-xs font-semibold text-white/70 hover:text-white transition-all cursor-pointer"
+                    title="Compartir o ver QR"
+                  >
+                    <Share2 className="w-4 h-4 text-cyan-400" />
+                    <span>Compartir</span>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

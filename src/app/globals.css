@@ -166,15 +166,13 @@
 .glass-category-active,
 .ios-glass-category-active {
   background: linear-gradient(135deg,
-      rgba(16, 185, 129, 0.28) 0%,
-      rgba(5, 150, 105, 0.12) 100%);
-  backdrop-filter: blur(48px) saturate(190%);
-  -webkit-backdrop-filter: blur(48px) saturate(190%);
+      rgba(16, 185, 129, 0.35) 0%,
+      rgba(5, 150, 105, 0.2) 100%);
   border-radius: 9999px;
-  border: 1px solid rgba(52, 211, 153, 0.55);
+  border: 1px solid rgba(52, 211, 153, 0.6);
   box-shadow:
     0 4px 16px rgba(0, 0, 0, 0.25),
-    0 0 16px rgba(16, 185, 129, 0.3),
+    0 0 16px rgba(16, 185, 129, 0.35),
     inset 0 1px 1px rgba(255, 255, 255, 0.7),
     inset 0 0 12px rgba(16, 185, 129, 0.15);
   color: #ffffff;
@@ -186,28 +184,26 @@
 .glass-category-active:hover,
 .ios-glass-category-active:hover {
   background: linear-gradient(135deg,
-      rgba(16, 185, 129, 0.38) 0%,
-      rgba(5, 150, 105, 0.18) 100%);
-  border-color: rgba(110, 231, 183, 0.8);
+      rgba(16, 185, 129, 0.45) 0%,
+      rgba(5, 150, 105, 0.25) 100%);
+  border-color: rgba(110, 231, 183, 0.85);
   box-shadow:
     0 6px 20px rgba(0, 0, 0, 0.3),
-    0 0 20px rgba(16, 185, 129, 0.4),
+    0 0 20px rgba(16, 185, 129, 0.45),
     inset 0 1.5px 1.5px rgba(255, 255, 255, 0.85);
 }
 
 .glass-category-inactive,
 .ios-glass-category-inactive {
   background: linear-gradient(135deg,
-      rgba(255, 255, 255, 0.12) 0%,
-      rgba(255, 255, 255, 0.04) 100%);
-  backdrop-filter: blur(36px) saturate(190%);
-  -webkit-backdrop-filter: blur(36px) saturate(190%);
+      rgba(255, 255, 255, 0.16) 0%,
+      rgba(255, 255, 255, 0.06) 100%);
   border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow:
     0 4px 14px rgba(0, 0, 0, 0.15),
     inset 0 1px 1px rgba(255, 255, 255, 0.45);
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.85);
   font-weight: 600;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -215,9 +211,9 @@
 .glass-category-inactive:hover,
 .ios-glass-category-inactive:hover {
   background: linear-gradient(135deg,
-      rgba(255, 255, 255, 0.22) 0%,
-      rgba(255, 255, 255, 0.08) 100%);
-  border-color: rgba(255, 255, 255, 0.45);
+      rgba(255, 255, 255, 0.25) 0%,
+      rgba(255, 255, 255, 0.1) 100%);
+  border-color: rgba(255, 255, 255, 0.5);
   color: #ffffff;
   box-shadow:
     0 6px 18px rgba(0, 0, 0, 0.2),
@@ -506,4 +502,30 @@
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.4);
   background-clip: padding-box;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-slideInRight {
+  animation: slideInRight 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.25s ease-out forwards;
 }

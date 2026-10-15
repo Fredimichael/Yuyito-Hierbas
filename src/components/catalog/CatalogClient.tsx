@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { MessageCircle, ArrowRight } from "lucide-react";
+import { MessageCircle, ArrowRight, Sparkles } from "lucide-react";
 import { Banner, Category, Product } from "@/types";
 import { CLUB_NAME, CLUB_TAGLINE, DEFAULT_WHATSAPP_NUMBER } from "@/lib/constants";
 import { getCatalogShareUrl, getWhatsAppShareUrl } from "@/lib/utils";
@@ -10,6 +10,7 @@ import { Footer } from "@/components/layout/Footer";
 import { ScenicBackground } from "@/components/layout/ScenicBackground";
 import { BannerSlider } from "@/components/catalog/BannerSlider";
 import { ProductGrid } from "@/components/catalog/ProductGrid";
+import { ProductCard } from "@/components/catalog/ProductCard";
 import { ProductModal } from "@/components/catalog/ProductModal";
 import { ShareModal } from "@/components/catalog/ShareModal";
 
@@ -27,6 +28,9 @@ export function CatalogClient({
   const [products] = useState<Product[]>(initialProducts);
   const [banners] = useState<Banner[]>(initialBanners);
   const [categories] = useState<Category[]>(initialCategories);
+
+  // Filtrar productos destacados
+  const featuredProducts = products.filter((p) => p.is_featured);
 
   // Selected product modal
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
@@ -83,10 +87,49 @@ export function CatalogClient({
 
       {/* Main Content */}
       <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-8 pt-24 sm:pt-28 w-full z-10">
-        {/* Destacados / Banners */}
+        {/* Hero Banners */}
         {banners.length > 0 && (
-          <section id="destacados" className="scroll-mt-28">
+          <section id="hero-banners" className="scroll-mt-28">
             <BannerSlider banners={banners} />
+          </section>
+        )}
+
+        {/* Productos Destacados */}
+        {featuredProducts.length > 0 && (
+          <section id="destacados" className="scroll-mt-28 my-10 sm:my-14">
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 sm:mb-8 gap-4">
+              <div>
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full ios-glass-pill-amber text-xs font-bold text-amber-300 mb-2 border border-amber-400/30 shadow-sm">
+                  <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+                  <span>Selección Especial</span>
+                </div>
+                <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+                  Productos Destacados
+                </h2>
+                <p className="text-xs sm:text-sm text-white/60 mt-1 max-w-lg">
+                  Los favoritos de nuestra comunidad: blends especiales, mates de autor y piezas únicas.
+                </p>
+              </div>
+
+              <div className="hidden sm:flex items-center gap-2">
+                <span className="text-xs px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-400/25 font-bold">
+                  {featuredProducts.length} productos destacados
+                </span>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
+              {featuredProducts.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  onSelect={(prod) => setSelectedProduct(prod)}
+                  onShare={(title, url, price, description) =>
+                    handleOpenShare(title, url, price, description)
+                  }
+                />
+              ))}
+            </div>
           </section>
         )}
 

@@ -20,13 +20,13 @@ export function Footer() {
           {/* Col 1: Brand Info */}
           <div className="md:col-span-2 flex flex-col gap-3">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl overflow-hidden bg-white/10 border border-emerald-400/30 flex items-center justify-center shadow-[0_0_15px_rgba(16,185,129,0.2)] p-1">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full overflow-hidden flex items-center justify-center">
                 <Image
-                  src="/logoyuyito.png"
+                  src="/logo-yuyito.png"
                   alt={CLUB_NAME}
-                  width={36}
-                  height={36}
-                  className="w-full h-full object-contain"
+                  width={56}
+                  height={56}
+                  className="w-full h-full object-contain rounded-full"
                 />
               </div>
               <span className="font-extrabold text-xl text-white tracking-tight">

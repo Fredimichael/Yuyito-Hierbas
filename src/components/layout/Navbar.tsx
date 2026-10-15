@@ -11,10 +11,12 @@ import {
   Sparkles,
   MessageCircle,
   Sprout,
-  ArrowRight
+  ArrowRight,
+  ShoppingBag
 } from "lucide-react";
 import { CLUB_NAME, DEFAULT_WHATSAPP_NUMBER } from "@/lib/constants";
 import { getWhatsAppShareUrl } from "@/lib/utils";
+import { useCart } from "@/context/CartContext";
 
 interface NavbarProps {
   onOpenShareModal?: () => void;
@@ -23,6 +25,7 @@ interface NavbarProps {
 export function Navbar({ onOpenShareModal }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { openCart, totalItems } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,6 +38,18 @@ export function Navbar({ onOpenShareModal }: NavbarProps) {
   const handleWhatsAppContact = () => {
     const msg = `¡Hola ${CLUB_NAME}! Vengo desde su catálogo web y me gustaría recibir información.`;
     window.open(getWhatsAppShareUrl(DEFAULT_WHATSAPP_NUMBER, msg), "_blank");
+  };
+
+  const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    if (typeof window !== "undefined" && (window.location.pathname === "/" || window.location.pathname === "")) {
+      const el = document.getElementById(targetId);
+      if (el) {
+        e.preventDefault();
+        el.scrollIntoView({ behavior: "smooth" });
+        window.history.pushState(null, "", `#${targetId}`);
+      }
+    }
+    setIsMobileMenuOpen(false);
   };
 
   return (
@@ -65,13 +80,13 @@ export function Navbar({ onOpenShareModal }: NavbarProps) {
               onClick={() => setIsMobileMenuOpen(false)}
               className="flex items-center gap-2.5 sm:gap-3 group"
             >
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl overflow-hidden bg-white/10 border border-emerald-400/40 flex items-center justify-center shadow-[0_0_15px_rgba(16,185,129,0.3)] group-hover:scale-105 transition-all p-1">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full overflow-hidden flex items-center justify-center group-hover:scale-105 transition-all">
                 <Image
-                  src="/logoyuyito.png"
+                  src="/logo-yuyito.png"
                   alt={CLUB_NAME}
-                  width={36}
-                  height={36}
-                  className="w-full h-full object-contain"
+                  width={56}
+                  height={56}
+                  className="w-full h-full object-contain rounded-full"
                   priority
                 />
               </div>
@@ -90,12 +105,14 @@ export function Navbar({ onOpenShareModal }: NavbarProps) {
             <nav className="hidden md:flex items-center gap-1">
               <Link
                 href="/#catalogo"
+                onClick={(e) => handleScrollTo(e, "catalogo")}
                 className="px-4 py-2 uppercase rounded-full text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 transition-all"
               >
                 Catálogo
               </Link>
               <Link
                 href="/#destacados"
+                onClick={(e) => handleScrollTo(e, "destacados")}
                 className="px-4 py-2 uppercase rounded-full text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 transition-all flex items-center gap-1.5"
               >
                 Destacados
@@ -110,6 +127,28 @@ export function Navbar({ onOpenShareModal }: NavbarProps) {
 
             {/* Desktop Quick Actions */}
             <div className="hidden sm:flex items-center gap-2.5">
+              {/* Botón Carrito / Pedido */}
+              <button
+                onClick={openCart}
+                className="relative glass-button px-3.5 py-2 rounded-full text-xs font-semibold text-white/90 flex items-center gap-2 hover:text-white cursor-pointer group"
+                title="Ver carrito de pedido"
+              >
+                <div className="relative flex items-center justify-center">
+                  <ShoppingBag className="w-3.5 h-3.5 text-emerald-400 group-hover:scale-110 transition-transform" />
+                  {totalItems > 0 && (
+                    <span className="absolute -top-2 -right-2.5 w-4 h-4 rounded-full bg-emerald-500 text-white text-[9px] font-black flex items-center justify-center shadow-md animate-pulse">
+                      {totalItems}
+                    </span>
+                  )}
+                </div>
+                <span>Pedido</span>
+                {totalItems > 0 && (
+                  <span className="text-[11px] font-bold text-emerald-300">
+                    ({totalItems})
+                  </span>
+                )}
+              </button>
+
               {onOpenShareModal && (
                 <button
                   onClick={onOpenShareModal}
@@ -131,8 +170,22 @@ export function Navbar({ onOpenShareModal }: NavbarProps) {
               </Link>
             </div>
 
-            {/* Mobile Actions: Share + Hamburger (con estilo píldora rounded-full como en PC) */}
+            {/* Mobile Actions: Carrito + Share + Hamburger (con estilo píldora rounded-full como en PC) */}
             <div className="flex sm:hidden items-center gap-1.5">
+              <button
+                onClick={openCart}
+                className="relative p-2 rounded-full glass-button text-emerald-400 hover:text-white transition-all active:scale-95 cursor-pointer"
+                aria-label="Ver carrito"
+                title="Ver Carrito de Pedido"
+              >
+                <ShoppingBag className="w-4 h-4" />
+                {totalItems > 0 && (
+                  <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-emerald-500 text-white text-[9px] font-black flex items-center justify-center shadow-md animate-pulse">
+                    {totalItems}
+                  </span>
+                )}
+              </button>
+
               {onOpenShareModal && (
                 <button
                   onClick={onOpenShareModal}
@@ -163,9 +216,25 @@ export function Navbar({ onOpenShareModal }: NavbarProps) {
               : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
               }`}
           >
+            <button
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                openCart();
+              }}
+              className="glass-panel p-3 rounded-2xl flex items-center justify-between text-white font-medium hover:bg-white/10 active:scale-[0.98] transition-all text-left cursor-pointer"
+            >
+              <div className="flex items-center gap-2.5">
+                <ShoppingBag className="w-4 h-4 text-emerald-400" />
+                <span className="text-sm font-semibold">
+                  Mi Pedido {totalItems > 0 ? `(${totalItems})` : ""}
+                </span>
+              </div>
+              <ArrowRight className="w-4 h-4 text-white/40" />
+            </button>
+
             <Link
               href="/#catalogo"
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={(e) => handleScrollTo(e, "catalogo")}
               className="glass-panel p-3 rounded-2xl flex items-center justify-between text-white font-medium hover:bg-white/10 active:scale-[0.98] transition-all"
             >
               <div className="flex items-center gap-2.5">
@@ -177,7 +246,7 @@ export function Navbar({ onOpenShareModal }: NavbarProps) {
 
             <Link
               href="/#destacados"
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={(e) => handleScrollTo(e, "destacados")}
               className="glass-panel p-3 rounded-2xl flex items-center justify-between text-white font-medium hover:bg-white/10 active:scale-[0.98] transition-all"
             >
               <div className="flex items-center gap-2.5">

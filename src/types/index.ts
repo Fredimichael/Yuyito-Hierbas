@@ -42,3 +42,9 @@ export interface FilterState {
   sortBy: SortOption;
   onlyInStock: boolean;
 }
+
+export interface CartItem {
+  product: Product;
+  quantity: number;
+}
+
